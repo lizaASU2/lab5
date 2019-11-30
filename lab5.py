@@ -55,25 +55,23 @@ def g2(n):
 m=[]
 m1=[]
 
-# сравниваем квадраты числа с его суммой и выводим наибольшее(сравнивает каждый с каждым)
+# сравниваем квадраты числа с его суммой и выводим наибольшее значение
 print('-----результат сравнения --------')
-for x in g1(n):
-    for y in g2(n):
-        if (x>y):
-            print('x>y= ',x)
-        else:
-            print('y>x= ',y)
-        if y not in m:
-            m.append(y)
+for x,y in zip(g1(n),g2(n)):
+    if (x>y):
+        print('x>y= ',x)
+    else:
+        print('y>x= ',y)
+    if y not in m:
+        m.append(y)
     m1.append(x)
 
 print('-----исходные списки--------')
 print('квадрат=', m1)
 print('сумма =', m)
 
-# тоже самое, но читаем из файла
+# считываем строки из двух файлов и записываем их в один список
 
-# файл 1
 def r1(file):
     with open(file) as f:
         for line in f:
@@ -82,20 +80,15 @@ def r1(file):
 
 s=[]
 s1=[]
+maxln=[]
 
-# сравниваем числа из двух файлов и выводим наибольшее
-print('-----результат сравнения --------')
-for x1 in r1('f1.txt'):
-    for y1 in r1('f2.txt'):
-        if (len(x1)>=len(y1)):
-             print('из f1= ',x1)
-        else:
-            print('из f2= ',y1)
-        if y1 not in s:
-             s.append(y1)
-    s1.append(x1)
-
+for x1,y1 in zip(r1('f1.txt'),r1('f2.txt')):
+    s.append(x1)
+    s1.append(y1)
+    maxln.append(x1)
+    maxln.append(y1)
 
 print('-----исходные списки--------')
-print('мсходный файл 1=', s1)
-print('исходный файл 2 =', s)
+print('исходный файл 1=', s1)
+print('исходный файл 2 =', s,'\n')
+print('итоговый файл  =', maxln)
