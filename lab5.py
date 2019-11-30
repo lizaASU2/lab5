@@ -77,7 +77,6 @@ def r1(file):
         for line in f:
             lst = line.split()
             yield lst
-
 s=[]
 s1=[]
 maxln=[]
@@ -92,3 +91,27 @@ print('-----исходные списки--------')
 print('исходный файл 1=', s1)
 print('исходный файл 2 =', s,'\n')
 print('итоговый файл  =', maxln)
+
+#_________________________________
+print("----------------------------")
+from datetime import datetime
+f1 = open('1.txt', 'w')
+f2 = open('2.txt', 'w')
+N = 100000000 # при таком N функция func1 вызывает ошибку MemoryError, а func2 записывает данные в файл (при запуске закоммент 107 строчку) )
+def func1(n):
+    res = []
+    for i in range(n):
+        res.append(i**2)
+    return res
+t1 = datetime.now()
+f1.write(str(func1(N)))
+t2 = datetime.now()
+print('Took {} seconds'.format(t2-t1))
+def func2(n):
+    for i in range(n):
+        yield i**2 # Позднее продолжить работу с этого места
+t1 = datetime.now()
+for i in func2(N): # Возобновить работу функции
+    f2.write(str(i)+' ')
+t2 = datetime.now()
+print('Took {} seconds'.format(t2-t1))
