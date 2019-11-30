@@ -104,7 +104,8 @@ def func1(n):
         res.append(i**2)
     return res
 t1 = datetime.now()
-f1.write(str(func1(N)))
+for i in func1(N):
+    f1.write(str(i)+' ')
 t2 = datetime.now()
 print('Took {} seconds'.format(t2-t1))
 def func2(n):
